@@ -1,0 +1,211 @@
+:root {
+  --iOS-black: #1C1C1E;
+  --iOS-grey: #AEAEB2;
+  --iOs-lightGrey: #D1D1D6;
+  --iOs-darkGrey: #48484A;
+  --iOS-orange: #FF9500;
+  --iOs-darkText: #1C1C1E;
+  --iOs-lightText: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--iOs-lightGrey);
+  
+}
+
+.main-container {
+  width: 414px;
+  height: 736px;
+  margin: 30px auto 0 auto;
+  background-color: var(--iOS-black);
+  color: var(--iOs-lightText);
+}
+
+/* Header */
+.container {
+  display: flex;
+  height: 10px;
+  padding-top: 5px;
+  justify-content: space-between;
+}
+
+.wifi {
+  position: relative;
+  left: 3px;
+}
+
+.time {
+  position: relative;
+  right: 10px;
+}
+
+.battery {
+  position: relative;
+  right: 3px;
+}
+
+/* Buttons */
+.btn {
+  height: 80px;
+  width: 80px;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 2.25rem;
+}
+
+.btn:focus:active {
+  border: none;
+  outline: none;
+}
+
+.btn-grey {
+  background-color: var(--iOS-grey);
+  color: var(--iOs-darkText);
+}
+
+.btn-orange {
+  background-color: var(--iOS-orange);
+  color: var(--iOs-lightText);
+}
+
+.btn-darkGrey {
+  background-color: var(--iOs-darkGrey);
+  color: var(--iOs-lightText);
+}
+
+/* Grid */
+.grid {
+  width: 400px;
+  margin: 50px auto 0 auto;
+  display: -ms-grid;
+  display: grid;
+  grid-template-areas:
+      "output output output output"
+      "clear plusAndMinus percent divide"
+      "seven eight nine multiply"
+      "four five six subtract"
+      "one two three add"
+      "zero zero decimal equals";
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 10px;
+  grid-column-gap: 0px;
+}
+
+.grid > * {
+  margin: auto;
+}
+
+.output {
+  grid-area: output;
+  height: 175px;
+  width: 90%;
+  font-size: 4.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.clear {
+  grid-area: clear;
+}
+
+.plusAndMinus {
+  grid-area: plusAndMinus;
+}
+
+.percent {
+  
+  grid-area: percent;
+}
+
+.divide {
+  
+  grid-area: divide;
+}
+
+.multiply {
+  grid-area: multiply;
+}
+
+.subtract {
+  grid-area: subtract;
+}
+
+.add {
+  grid-area: add;
+}
+
+.equals {
+  grid-area: equals;
+}
+
+.decimal {
+  grid-area: decimal;
+}
+
+.nine {
+  grid-area: nine;
+}
+
+.eight {
+  grid-area: eight;
+}
+
+.seven {
+  grid-area: seven;
+}
+
+.six {
+  grid-area: six;
+}
+
+.btn[value="5"] {
+  grid-area: five;
+}
+
+.four {
+  grid-area: four;
+}
+
+.three {
+  grid-area: three;
+}
+
+.two {
+  grid-area: two;
+}
+
+.one {
+  grid-area: one;
+}
+
+.zero {
+  grid-area: zero;
+  width: 180px;
+  border-radius: 50px;
+}
+
+#zero {
+  position: relative;
+  right: 50px;
+  z-index: 6;
+}
+
+/* Footer */
+footer {
+  margin: 10px;
+  text-align: center;
+}
