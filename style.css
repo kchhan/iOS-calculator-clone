@@ -1,24 +1,23 @@
 :root {
-  --iOS-black: #1C1C1E;
-  --iOS-grey: #AEAEB2;
-  --iOs-lightGrey: #D1D1D6;
-  --iOs-darkGrey: #48484A;
-  --iOS-orange: #FF9500;
-  --iOs-darkText: #1C1C1E;
-  --iOs-lightText: #fff;
+  --iOS-black: #1c1c1e;
+  --iOS-grey: #aeaeb2;
+  --iOS-lightGrey: #d1d1d6;
+  --iOs-darkGrey: #48484a;
+  --iOS-orange: #ff9500;
+  --iOS-darkText: #1c1c1e;
+  --iOS-lightText: #fff;
 }
 
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
 }
 
 body {
-  background-color: var(--iOs-lightGrey);
-  
+  background-color: var(--iOS-lightGrey);
 }
 
 .main-container {
@@ -26,7 +25,7 @@ body {
   height: 736px;
   margin: 30px auto 0 auto;
   background-color: var(--iOS-black);
-  color: var(--iOs-lightText);
+  color: var(--iOS-lightText);
 }
 
 /* Header */
@@ -66,24 +65,24 @@ body {
   font-size: 2.25rem;
 }
 
-.btn:focus:active {
+.btn::-moz-focus-inner {
   border: none;
   outline: none;
 }
 
 .btn-grey {
   background-color: var(--iOS-grey);
-  color: var(--iOs-darkText);
+  color: var(--iOS-darkText);
 }
 
 .btn-orange {
   background-color: var(--iOS-orange);
-  color: var(--iOs-lightText);
+  color: var(--iOS-lightText);
 }
 
 .btn-darkGrey {
   background-color: var(--iOs-darkGrey);
-  color: var(--iOs-lightText);
+  color: var(--iOS-lightText);
 }
 
 /* Grid */
@@ -93,12 +92,12 @@ body {
   display: -ms-grid;
   display: grid;
   grid-template-areas:
-      "output output output output"
-      "clear plusAndMinus percent divide"
-      "seven eight nine multiply"
-      "four five six subtract"
-      "one two three add"
-      "zero zero decimal equals";
+    'output output output output'
+    'clear plusAndMinus percent divide'
+    'seven eight nine multiply'
+    'four five six subtract'
+    'one two three add'
+    'zero zero decimal equals';
   grid-template-columns: repeat(4, 1fr);
   grid-row-gap: 10px;
   grid-column-gap: 0px;
@@ -127,12 +126,10 @@ body {
 }
 
 .percent {
-  
   grid-area: percent;
 }
 
 .divide {
-  
   grid-area: divide;
 }
 
@@ -172,7 +169,7 @@ body {
   grid-area: six;
 }
 
-.btn[value="5"] {
+.btn[value='5'] {
   grid-area: five;
 }
 

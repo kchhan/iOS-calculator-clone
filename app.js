@@ -1,4 +1,4 @@
-// DOM 
+// DOM
 const timeDisplay = document.querySelector('.timeDisplay');
 const output = document.querySelector('.output');
 const btnClear = document.querySelector('.clear');
@@ -10,52 +10,7 @@ const btnSubtract = document.querySelector('.subtract');
 const btnAdd = document.querySelector('.add');
 const btnEquals = document.querySelector('.equals');
 const btnDecimal = document.querySelector('.decimal');
-const btn = document.getElementsByClassName('btn');
-
-// Accurate clock
-function updateClock() {
-  const date = new Date();
-  const currentTime = `${date.getHours()}:${date.getMinutes()}`;
-  timeDisplay.textContent = currentTime;  
-}
-updateClock();
-
-(function() {
-  setInterval(function(){
-    updateClock(timeDisplay)
-  }, 1000);
-}());
-
-// Add listener to btn input
-// btn[8] = 9, btn[9] = 8, all the way to btn[17] = 0
-output.textContent = "0"; // Inital display
-for (let i = 8; i <= 17; i++){
-  btn[i].addEventListener('click', addInput);
-}
-
-function addInput() {
-  if (initialZero) {
-    output.textContent = "";
-    initialZero = false;
-  }
-  if (clearOutput) {
-    output.textContent = "";
-    clearOutput = false;
-  }
-  if (output.textContent.length < 8) { 
-    output.textContent += this.value; 
-  }
-}
-
-btnDivide.addEventListener('click', storeFirstNum);
-btnMultiply.addEventListener('click', storeFirstNum);
-btnSubtract.addEventListener('click', storeFirstNum);
-btnAdd.addEventListener('click', storeFirstNum);
-btnEquals.addEventListener('click', storeSecondNum);
-
-btnPercent.addEventListener('click', makePercent);
-btnDecimal.addEventListener('click', addDecimal);
-btnPlusAndMinus.addEventListener('click', changeOperation);
+const grid = document.querySelector('.grid');
 
 // Stored Variables
 let firstNum;
@@ -67,7 +22,65 @@ let clearOutput = false;
 let containsDecimal = false;
 let isPercent = false;
 
-function storeFirstNum(){
+btnDivide.addEventListener('click', storeFirstNum);
+btnMultiply.addEventListener('click', storeFirstNum);
+btnSubtract.addEventListener('click', storeFirstNum);
+btnAdd.addEventListener('click', storeFirstNum);
+btnEquals.addEventListener('click', storeSecondNum);
+
+btnPercent.addEventListener('click', makePercent);
+btnDecimal.addEventListener('click', addDecimal);
+btnPlusAndMinus.addEventListener('click', changeOperation);
+
+// Accurate clock
+function updateClock() {
+  const date = new Date();
+  const formattedHours = () => {
+    const hours = date.getHours();
+    if (hours < 10) {
+      return `0${hours}`;
+    }
+    return hours;
+  };
+  const formattedMinutes = () => {
+    const minutes = date.getMinutes();
+    if (minutes < 10) {
+      return `0${minutes}`;
+    }
+    return minutes;
+  };
+  const currentTime = `${formattedHours()}:${formattedMinutes()}`;
+  timeDisplay.textContent = currentTime;
+}
+updateClock();
+
+(() => {
+  setInterval(function () {
+    updateClock(timeDisplay);
+  }, 1000);
+})();
+
+output.textContent = '0'; // Inital display
+
+grid.addEventListener('click', addInput);
+
+function addInput(e) {
+  if (e.target.classList.contains('number')) {
+    if (initialZero) {
+      output.textContent = '';
+      initialZero = false;
+    }
+    if (clearOutput) {
+      output.textContent = '';
+      clearOutput = false;
+    }
+    if (output.textContent.length < 8) {
+      output.textContent += e.target.value;
+    }
+  }
+}
+
+function storeFirstNum() {
   operator = this.value;
   firstNum = parseFloat(output.textContent);
   clearOutput = true;
@@ -81,62 +94,48 @@ function storeSecondNum() {
 }
 
 // Methods
-function evaluate(operator){
+function evaluate(operator) {
   switch (operator) {
     case '÷':
-      divide(firstNum, secondNum);
+      if (secondNum == 0) {
+        output.textContent = `Error`;
+        clearOutput = true;
+        return;
+      }
+      total = firstNum / secondNum;
+      output.textContent = formattedOutput(total);
       break;
     case '*':
-      multiply(firstNum, secondNum);
+      total = firstNum * secondNum;
+      output.textContent = formattedOutput(total);
       break;
     case '-':
-      subtract(firstNum, secondNum);
+      total = firstNum - secondNum;
+      output.textContent = formattedOutput(total);
       break;
     case '+':
-      add(firstNum, secondNum);
+      total = firstNum + secondNum;
+      output.textContent = formattedOutput(total);
       break;
   }
 }
 
-function divide() {
-  if (secondNum == 0) {
-    output.textContent = `Error`;
-    clearOutput = true;
-    return;
-  }
-  total = firstNum/secondNum;
-  output.textContent = total;
-}
-
-function multiply() {
-  total = firstNum * secondNum;
-  output.textContent = total;
-}
-
-function subtract() {
-  total = firstNum - secondNum;
-  output.textContent = total;
-}
-
-function add() {
-  total = firstNum + secondNum;
-  output.textContent = total;
-}
-
+const formattedOutput = (total) => {
+  return total >= 1000000000 ? total.toExponential(2) : total;
+};
 
 // Other Methods
 function makePercent() {
-  if (!containsDecimal && !isPercent){
+  if (!containsDecimal && !isPercent) {
     output.textContent = parseFloat(output.textContent) / 100;
     containsDecimal = true;
     isPercent = true;
   }
-  
 }
 
 function addDecimal() {
   if (!containsDecimal && !isPercent) {
-    output.textContent = `${output.textContent}.`
+    output.textContent = `${output.textContent}.`;
     containsDecimal = true;
     isPercent = true;
   }
@@ -148,18 +147,17 @@ function changeOperation() {
   } else {
     output.textContent = `-${output.textContent}`;
   }
-    
 }
 
 // All clear variables
 btnClear.addEventListener('click', clear);
 
 function clear() {
-  output.textContent = "0";
+  output.textContent = '0';
   initialZero = true;
   containsDecimal = false;
   isPercent = false;
-  firstNum = "";
-  secondNum = "";
-  operator = "";
+  firstNum = '';
+  secondNum = '';
+  operator = '';
 }
